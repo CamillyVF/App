@@ -1,83 +1,88 @@
 const { select, input, checkbox } = require('@inquirer/prompts')
 
 let meta = {
-    value: 'Tomar 3L de agua por dia',
+    value: 'Tomar 3L de água por dia',
     checked: false,
 }
 
-let metas = [meta]
+let metas = [ meta ]
 
-const CadastraMeta = async () => {
-    const meta = await input({message: "Digite a meta:"})
+const cadastrarMeta = async () => {
+    const meta = await input({ message: "Digite a meta:"})
 
-    if(meta.length == 0){
-        console.log("a meta não pode ser vazia.")
+    if(meta.length == 0) {
+        console.log('A meta não pode ser vazia.')
         return
     }
 
-    meta.push(
-        {value: meta, checked: false}
+    metas.push(
+        { value: meta, checked: false }
     )
 }
 
-const ListarMetas = async () => {
+const listarMetas = async () => {
     const respostas = await checkbox({
-        message: "Use as setas para mudar, o espaço para marcar/desmarcar e o Enter para finalizar",
+        message: "Use as setas para mudar de meta, o espaço para marcar ou desmarcar e o Enter para finalizar essa etapa",
         choices: [...metas],
         instructions: false,
     })
 
-    if(respostas.length == 0){
-        console.log("nenhuma meta selecionada!")
+    if(respostas.length == 0) {
+        console.log("Nenhuma meta selecionada!")
         return
     }
 
-metas.forEach((m) =>{
-    m.checked = false
-})
+    metas.forEach((m) => {
+        m.checked = false
+    })
 
-    respostas.forEach((respostas) =>{
+    respostas.forEach((resposta) => {
         const meta = metas.find((m) => {
-            return m.value == respostas
+            return m.value == resposta
         })
+
         meta.checked = true
     })
+
+    console.log('Meta(s) marcadas como concluída(s)')
+
 }
 
-console.log('meta(s) concluida(s)')
 
-const start = async() => {
-
+const start = async () => {
     while(true){
+        
         const opcao = await select({
             message: "Menu >",
             choices: [
                 {
-                    name: "Cadastra metas",
-                    value: "Cadastrar"
+                    name: "Cadastrar meta",
+                    value: "cadastrar"
                 },
                 {
                     name: "Listar metas",
-                    value: "Listar"
+                    value: "listar"
                 },
                 {
                     name: "Sair",
-                    value: "Sair"
+                    value: "sair"
                 }
             ]
         })
-        switch(opcao){
-            case "Cadastrar":
-                CadastraMeta()
+
+        switch(opcao) {
+            case "cadastrar":
+                await cadastrarMeta()
                 console.log(metas)
                 break
-            case "Listar":
-                await ListarMetas()
+            case "listar":
+                await listarMetas()
                 break
-            case "Sair":
-                console.log("Bye bye!")
+            case "sair":
+                console.log('Até a próxima!')
                 return
         }
     }
 }
-start()
+
+start();
