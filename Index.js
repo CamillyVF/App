@@ -1,15 +1,9 @@
-// Hello world
-let meta = {
-    value: "ler um livro por mês",
-    checked: false,
-    log:(info) => {
-        console.log(info)
+const start = () => {
+    let count = 1
+    while(count <= 10){
+        console.log(count)
+        count = count + 1
     }
 }
 
-meta.log(meta.value)
-
-//function
-const CriarMeta = () => {}
-
-function CriarMeta() {}
+start()
