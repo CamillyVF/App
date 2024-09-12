@@ -36,6 +36,7 @@ Apresentar os dados
 
 - [x] Operadores de atribuição de valor: =
 - [x] Operador de contatenação: +
+- [x] Operadores de comparação: ==
 
 ## Estruturas de dados:
 
@@ -62,6 +63,7 @@ Apresentar os dados
 ## condicionais 
 
 - [x] switch
+- [x] if/else
 
 # Modulos em Node.js:
 - [x] Importação de modulos(require, commonJs)

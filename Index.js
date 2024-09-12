@@ -1,4 +1,26 @@
-const { select } = require('@inquirer/prompts')
+const { select, input } = require('@inquirer/prompts')
+
+let meta = {
+    value: 'Tomar 3L de agua por dia',
+    checked: false,
+}
+
+let metas = [meta]
+
+const CadastraMeta = async () => {
+    const meta = await input({message: "Digite a meta:"})
+
+    if(meta.length == 0){
+        console.log("a meta não pode ser vazia.")
+        return
+    }
+
+    meta.push(
+        {value: meta, checked: false}
+    )
+}
+
+
 const start = async() => {
 
     while(true){
@@ -19,10 +41,10 @@ const start = async() => {
                 }
             ]
         })
-
         switch(opcao){
             case "Cadastrar":
-                console.log ("vamos cadastrar")
+                CadastraMeta()
+                console.log(metas)
                 break
             case "Listar":
                 console.log("vamos listar")
